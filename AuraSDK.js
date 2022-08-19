@@ -1,5 +1,11 @@
 // JavaScript source code
 
+// Registering Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+}
+
 function AuraSDK() {
     var uri;
 }
