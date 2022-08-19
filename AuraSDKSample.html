@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Aura SDK Sample</title>
+    <link rel="stylesheet" type="text/css" href="ModalDlg.css">
+    <link rel="stylesheet" type="text/css" href="TabbedDlg.css">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        button {
+            width: 200px;
+            height: 35px;
+        }
+    </style>
+    <script src="AuraSDK.js"></script>
+    <script type="text/javascript">
+        var AuraSDK = new AuraSDK();
+    </script>
+</head>
+<body>
+    <div id="table" style="margin:auto; width:718px; padding:50px; text-align:center">
+        <div class="tab">
+            <a href="javascript:void(0)" class="tablinks" onclick="showTab(event, 'GameEvent')" id="defaultOpen">Game Event</a>
+            <a href="javascript:void(0)" class="tablinks" onclick="showTab(event, 'SDK')">SDK</a>
+        </div>
+
+        <div id="GameEvent" class="tabcontent">
+			<p><button onclick="AuraSDK.init()">Init</button></p>
+			<hr />
+			<p style="color:DodgerBlue;"ss>Loop event</p>
+			<p><button onclick="AuraSDK.sendEvent('Menu_Idle')">Menu idle</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Scene_snow')">Scene_snow</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Scene_elevator')">Scene_elevator</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Game_Idle')">Game_Idle</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Player_dead')">Player_dead</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Full_black')">Full black</button></p>
+			<hr />
+			<p style="color:DodgerBlue;">OneShot event</p>
+			<p><button onclick="AuraSDK.sendEvent('Menu_Hover')">Menu_Hover</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Menu_Submenu')">Menu_EnterSubmenu</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Gamestart')">GameStart</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Gamestart_Countdown')">GameStart_Countdown</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Shooting')">Shooting</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Fighting')">Fighting</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Attacked')">Attacked</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Skill_activate')">Skill_activate</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Cure')">Cure</button></p>
+			<p><button onclick="AuraSDK.sendEvent('Enemy_dead')">Enemy_dead</button></p>
+			<hr />
+			<p style="color:DodgerBlue;">Hotkey event</p>
+			<p><button onclick="AuraSDK.bindhotkeyEvent()">bind hotkey</button></p>
+			<p><button onclick="AuraSDK.hotkeyEvent_flash()">hotkey flash</button></p>
+			<p><button onclick="AuraSDK.hotkeyEvent_nonflash()">hotkey stop flash</button></p>
+			<p><button onclick="AuraSDK.delete_Event('Hotkey')">delete hotkey event</button></p>
+			<hr />
+			<p style="color:DodgerBlue;">Health event</p>
+			<p><button onclick="AuraSDK.bindHealthEvent()">bind Health</button></p>
+			<p><button onclick="AuraSDK.UpdateEvent('Health', 'High')">high Health</button></p>
+			<p><button onclick="AuraSDK.UpdateEvent('Health', 'Medium')">medium Health</button></p>
+			<p><button onclick="AuraSDK.UpdateEvent('Health', 'Low')">low Health</button></p>
+			<p><button onclick="AuraSDK.delete_Event('Health')">delete health event</button></p>
+			<hr />
+			<p style="color:DodgerBlue;">Customized event</p>
+			<p><button onclick="AuraSDK.register_loopEvent()">register loop Event</button></p>
+			<p><button onclick="AuraSDK.send_registerloopEvent()">send registered loop Event</button></p>
+			<p><button onclick="AuraSDK.register_oneshotEvent()">register oneshot Event</button></p>
+			<p><button onclick="AuraSDK.send_registeroneshotEvent()">send registered oneshot Event</button></p>
+			<p><button onclick="AuraSDK.uninit()">DeInit</button></p>
+			<!--<p><button onclick="AuraSDK.getcolor()">Get current color</button></p>-->
+        </div>
+
+        <div id="SDK" class="tabcontent">
+			<p><button onclick="AuraSDK.sdkinit()">Init</button></p>
+			<p><button onclick="AuraSDK.listdevice()">List connected device</button></p>
+			<p><button onclick="AuraSDK.queryLayout('NB_Keyboard')">Query layout</button></p>
+            <p><button onclick="AuraSDK.setallcolor()">Set all color</button></p>
+            <p><button onclick="AuraSDK.setCustomkey('NB_Keyboard')">Set custom color</button></p>
+			<p><button onclick="AuraSDK.apply()">Only apply</button></p>
+			<p><button onclick="AuraSDK.uninit()">DeInit</button></p>
+        </div>
+    </div>
+	<div id="over" class="overLoading"></div>
+	<div id="layout" class="layoutLoading"><img src="loading.gif" /></div>
+    <script>
+        function showTab(evt, deviceName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(deviceName).style.display = "block";
+            evt.currentTarget.className += " active";
+
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
+</body>
+</html>
